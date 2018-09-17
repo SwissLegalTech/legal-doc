@@ -8,7 +8,8 @@ const client = new language.LanguageServiceClient();
 function analyze(req, res) {
 
 // The text to analyze
-    var text = 'Hello, world!';
+    var text = req.query.text;
+    console.log(text)
 
     var document = {
         content: text,
@@ -23,6 +24,7 @@ function analyze(req, res) {
             console.log(`Text: ${text}`);
             console.log(`Sentiment score: ${sentiment.score}`);
             console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
+            res.send(sentiment)
         })
         .catch(err => {
             console.error('ERROR:', err);
