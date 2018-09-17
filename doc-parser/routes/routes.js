@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-const fileParser = require('./providers/fileParser');
+const fileParser = require('./providers/file-parser');
 
 let router = express.Router();
 

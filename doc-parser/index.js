@@ -30,5 +30,5 @@ app.use(bodyParser.json());
 // register all routes for versions
 app.use('/v10', require(`./routes/routes.js`));
 	
-
+console.log(`Server listening on port ${process.env.PORT || 8081} ...`);
 app.listen(process.env.PORT || 8081);
