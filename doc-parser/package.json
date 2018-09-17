@@ -1,0 +1,13 @@
+{
+  "name": "base-interview",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm run test-unit"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "express": "^4.16.3"
+  }
+}
