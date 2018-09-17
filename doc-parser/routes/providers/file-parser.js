@@ -1,60 +1,83 @@
-'use strict';
-const pdfToJSON = require('pdf-parse');
-const fs = require('fs');
+// Imports the Google Cloud client library
+const language = require('@google-cloud/language');
+const async = require('async');
+const letterStructureAnalyze = require('./strucutre-analyzer');
 
+// Creates a client
+const client = new language.LanguageServiceClient();
 
-/**
- * @method  click
- * @desc    parses PDF document to JSON format
- *
- * @param	{String}	type	legal document type
- */
-function parseFile(req, res) {
+function parseFile(req,res) {
 
-    function render_page(pageData, ret) {
-        //check documents https://mozilla.github.io/pdf.js/
-        ret.text = ret.text ? ret.text : "";
-     
-        let render_options = {
-            //replaces all occurrences of whitespace with standard spaces (0x20).
-            normalizeWhitespace: false,
-            //do not attempt to combine same line TextItem's.
-            disableCombineTextItems: true
-        }
-     
-        return pageData.getTextContent(render_options)
-            .then(function(textContent) {
-                let strings = textContent.items.map(item => item.str);
-                let text = strings.join(' ');
-                ret.text = `${ret.text}${text}\n\n`;
+    // let text = `Arbeitszeugnis\nFrau Maria De Bon, geboren am 07.06.1988, wohnhaft in Zürich, war vom 14. Oktober 2011 bis am 10. September 2012 in unserer Kanzlei als Anwaltsassistentin tätig.\nLutz Rechtsanwälte ist eine Kanzlei, die vorwiegend im Wirtschafts- und Gesellschaftsrecht sowie in Zivil-, Immobilien- und Mietrecht tätig ist und verfügt über 5 Rechtsanwältinnen und Rechtsanwälte.\nDas Aufgabengebiet von Frau Maria De Bon umfasste hauptsächlich folgende Aufgaben:\n*Erstellen und Redaktion von Korrespondenz und juristischen Texten jeder Art (Rechtsschriften, Gutachten, Plädoyernotizen, Protokolle) in deutscher und englischer Sprache nach Diktat, Vorlage und Anweisung;Eigenständige Erledigung administrativer Korrespondenz;Zusammenstellen aller erforderlichen Unterlagen für Rechtsschriften und andere grössere Eingaben;Selbständige Erledigung der in einer Anwaltskanzlei anfallenden administrativen Tätigkeiten wie Rechnungsstellung, Debitorenkontrolle, Mahnwesen, Termin- und Fristenverwaltung etc.\nWir schätzen Frau Maria De Bon als sehr pflichtbewusste, vertrauenswürdige und einsatzfreudige Mitarbeiterin. Sie arbeitete sich dank ihrer sehr guten Auffassungsgabe sehr schnell in ihr vielfältiges Arbeitsgebiet ein. Wir lernten sie als einsatzbereite, zuverlässige und pflichtbewusste Teamkollegin kennen. Sie erledigte ihre Aufgaben speditiv und stets zu unserer vollsten Zufriedenheit. Ihre guten Französisch und Englischkenntnisse kamen auf der Geschäftsstelle bestens zum Tragen.\nDas freundliche, korrekte und zuvorkommende Verhalten von Frau Maria De Bon gegenüber Vorgesetzten, Mitarbeitern und Klienten wurde von allen sehr geschätzt und ermöglichte eine stets angenehme und vertrauensvolle Zusammenarbeit.\nDas Arbeitsverhältnis mit Frau De Bon war von Anfang an befristet und endet per 31. Juli 2012.\nWir bedauern den Weggang von Frau Maria De Bon sehr und wünschen ihr in beruflicher und privater Hinsicht weiterhin viel Erfolg und alles Gute.`
+let text = `Frau Maria De Bon, geboren am 07.06.1988, wohnhaft in Zürich, war vom 14. Oktober 2011 bis am 10. September 2012 in unserer Kanzlei als Anwaltsassistentin tätig.
+
+Lutz Rechtsanwälte ist eine Kanzlei, die vorwiegend im Wirtschafts- und Gesellschaftsrecht sowie in Zivil-, Immobilien- und Mietrecht tätig ist und verfügt über 5 Rechtsanwältinnen und Rechtsanwälte.
+
+Das Aufgabengebiet von Frau Maria De Bon umfasste hauptsächlich folgende Aufgaben:
+
+ Erstellen und Redaktion von Korrespondenz und juristischen Texten jeder Art (Rechtsschriften, Gutachten, Plädoyernotizen, Protokolle) in deutscher und englischer Sprache nach Diktat, Vorlage und Anweisung;
+
+ Eigenständige Erledigung administrativer Korrespondenz;
+
+ Zusammenstellen aller erforderlichen Unterlagen für Rechtsschriften und andere grössere Eingaben;
+
+ Selbständige Erledigung der in einer Anwaltskanzlei anfallenden administrativen Tätigkeiten wie Rechnungsstellung, Debitorenkontrolle, Mahnwesen, Termin- und Fristenverwaltung etc.
+
+Wir haben Frau Maria De Bon als pflichtbewusste, vertrauenswürdige und einsatzfreudige Mitarbeiterin wahrgenommen. Sie arbeitete sich dank ihrer guten Auffassungsgabe schnell in ihr vielfältiges Arbeitsgebiet ein. Wir lernten sie als einsatzbereite, zuverlässige und pflichtbewusste Kollegin kennen. Sie erledigte ihre Aufgaben speditiv und zu unserer Zufriedenheit. Ihre guten Französisch und Englischkenntnisse kamen auf der Geschäftsstelle bestens zum Tragen.
+
+Das freundliche, korrekte und zuvorkommende Verhalten von Frau Maria De Bon gegenüber Vorgesetzten, Mitarbeitern und Klienten wurde von allen geschätzt und ermöglichte eine angenehme und vertrauensvolle Zusammenarbeit.
+
+Das Arbeitsverhältnis mit Frau De Bon war von Anfang an befristet und endet per 31. Juli 2012.
+
+Wir bedauern den Weggang von Frau Maria De Bon und wünschen ihr in beruflicher und privater Hinsicht weiterhin viel Erfolg.`
+
+    // replace list asterisk
+    let parsedText = text.replace(/\n\n[^a-zA-Z0-9]/gm,' * ')
+
+    let fileParsed = parsedText.split(/\n/g);
+    let fileStructure = {
+        nameData: [],
+        addressData: [],
+        other: []
+    };
+
+    async.eachOf(fileParsed,(paragraph, index, cb)=>{
+        var document = {
+            content: paragraph,
+            type: 'PLAIN_TEXT',
+        };
+
+        client
+        .analyzeEntities({document: document})
+        .then(results => {
+            const entities = results[0].entities;
+
+            entities.forEach(entity => {
+                if(entity.type === 'PERSON' && entity.salience > 0.9) {
+                    fileStructure.nameData.push(fileParsed[index]);
+                } else if (entity.type === 'LOCATION' && entity.salience > 0.9){
+                    fileStructure.addressData.push(fileParsed[index]);
+                } else {
+                    fileStructure.other[index] = fileParsed[index];
+                }
             });
-    }
-     
-    let options = {
-        pagerender: render_page
-    }
+            cb();
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+            cb();
+        });
+    },(error) => {
+        fileStructure.paragraphs = fileStructure.other.filter(value => {
+            return !!value;
+        });
 
-    let dataBuffer = fs.readFileSync('./file-examples/test.pdf');
- 
-    pdfToJSON(dataBuffer,options).then((data) => {
-    
-        // number of pages
-        console.log(data.numpages);
-        // number of rendered pages
-        console.log(data.numrender);
-        // PDF info
-        console.log(data.info);
-        // PDF metadata
-        console.log(data.metadata); 
-        // PDF.js version
-        // check https://mozilla.github.io/pdf.js/getting_started/
-        console.log(data.version);
-        // PDF text
-        console.log(data.text); 
+        delete fileStructure.other;
 
-        res.send(data);
-            
-    });
+        letterStructureAnalyze(fileStructure, res)
+        
+    })
+
     
 }
 
