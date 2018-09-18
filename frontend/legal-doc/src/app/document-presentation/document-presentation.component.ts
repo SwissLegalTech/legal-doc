@@ -22,7 +22,7 @@ export class DocumentPresentationComponent implements OnInit {
           paragraph.sentences.forEach(sentence => {
             if(sentence.score < 0) {
               this.finalScore = 'mediocre';
-              this.structureScore = 'bad';
+              this.contentScore = 'bad';
             }
           });
         }
