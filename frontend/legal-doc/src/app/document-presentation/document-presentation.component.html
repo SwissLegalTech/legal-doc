@@ -2,15 +2,27 @@
   <div class="container" style="background-color: white;">
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-1">Overall score</div>
-      <div class="col-md-3 text-center score-table-1">attention</div>
+      <div class="col-md-3 text-center score-table-1" [ngClass]="{
+      'working-good': finalScore==='good',
+      'working-moderate': finalScore==='mediocre',
+      'working-bad': finalScore==='bad'
+      }">{{finalScore}}</div>
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-2">Content score</div>
-      <div class="col-md-3 text-center score-table-2">bad</div>
+      <div class="col-md-3 text-center score-table-2" [ngClass]="{
+      'working-good': contentScore==='good',
+      'working-moderate': contentScore==='mediocre',
+      'working-bad': contentScore==='bad'
+      }">{{contentScore}}</div>
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-1">Structure score</div>
-      <div class="col-md-3 text-center score-table-1">good</div>
+      <div class="col-md-3 text-center score-table-1" [ngClass]="{
+      'working-good': structureScore==='good',
+      'working-moderate': structureScore==='mediocre',
+      'working-bad': structureScore==='bad'
+      }">{{structureScore}}</div>
     </div>
   </div>
   <a (click)="takeMeBack()"><img src="../../assets/images/back-arrow.jpg" height="40" width="40"/></a>
@@ -25,8 +37,9 @@
     <div *ngIf="parsedDocument.paragraphs">
       <div class="row m-2" *ngFor="let paragraph of parsedDocument.paragraphs">
         <div *ngIf="!paragraph.sentences">
-          <h3>{{ paragraph.meta.class }}</h3>
+          <span class="metadata" *ngIf="paragraph.meta.length>0">{{ paragraph.meta[0].class }}</span>
         </div>
+        <div *ngIf="!paragraph.sentences"></div>
         <div data-toggle="tooltip" title="This paragraph is neutral." *ngIf="!paragraph.sentences" [innerHTML]="paragraph.text"></div>
         <div *ngIf="paragraph.sentences">
             <span *ngFor="let sentence of paragraph.sentences" data-toggle="tooltip" title="Score for this sentence: {{sentence.score}}"

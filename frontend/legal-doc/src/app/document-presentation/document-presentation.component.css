@@ -1,13 +1,13 @@
 .working-good {
-  background-color: lightgreen;
+  background-color: lightgreen !important;
 }
 
 .working-bad {
-  background-color: red;
+  background-color: red !important;
 }
 
 .working-moderate {
-  background-color: yellow;
+  background-color: yellow !important;
 }
 
 .container-presentation {
@@ -20,9 +20,15 @@
 .score-table-1 {
   background-color: aliceblue;
   border-radius: 10px;
+  font-size: 2rem;
 }
 
 .score-table-2 {
   background-color: #ececea;
   border-radius: 10px;
+  font-size: 2rem;
+}
+
+.metadata {
+  color: blue;
 }

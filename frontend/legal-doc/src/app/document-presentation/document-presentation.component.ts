@@ -8,12 +8,29 @@ import {DocumentService} from '../shared/document.service';
 })
 export class DocumentPresentationComponent implements OnInit {
   parsedDocument;
+  finalScore = '';
+  contentScore = '';
+  structureScore = '';
   constructor(private documentService: DocumentService) {
   }
 
   ngOnInit() {
     this.documentService.parseDocument().subscribe(data => {
       this.parsedDocument = data;
+      this.parsedDocument.paragraphs.forEach(paragraph => {
+        if(paragraph.sentences) {
+          paragraph.sentences.forEach(sentence => {
+            if(sentence.score < 0) {
+              this.finalScore = 'mediocre';
+            }
+          });
+        }
+      });
+      if(this.finalScore === '') {
+        this.finalScore = 'good';
+      }
+      this.contentScore = 'bad';
+      this.structureScore = 'good';
     });
   }
 
