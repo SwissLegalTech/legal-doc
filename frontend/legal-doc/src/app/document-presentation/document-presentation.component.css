@@ -1,9 +1,9 @@
 .working-good {
-  color: green;
+  background-color: lightgreen;
 }
 
 .working-bad {
-  color: red;
+  background-color: red;
 }
 
 .container-presentation {
