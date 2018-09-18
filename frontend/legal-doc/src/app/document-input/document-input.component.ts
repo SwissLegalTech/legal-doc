@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DocumentService} from '../shared/document.service';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-document-input',
@@ -9,8 +8,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class DocumentInputComponent implements OnInit {
   text;
-  constructor(private documentService: DocumentService,
-              private http: HttpClient) { }
+  constructor(public documentService: DocumentService) { }
 
   ngOnInit() {
   }

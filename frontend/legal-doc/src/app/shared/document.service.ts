@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
 @Injectable()
 export class DocumentService {
   isDocumentInfoVisible = false;
   isMainPageVisible = true;
   parsedData;
-  inputText;
+  inputText = '';
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +28,9 @@ export class DocumentService {
 
   public setInputText(text) {
     this.inputText = text;
-}
+  }
+
+  public getInputText() {
+    return this.inputText;
+  }
 }

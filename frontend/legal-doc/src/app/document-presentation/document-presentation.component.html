@@ -2,18 +2,18 @@
   <div class="container" style="background-color: white;">
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-1">Overall score</div>
-      <div class="col-md-3 text-center score-table-1">90%</div>
+      <div class="col-md-3 text-center score-table-1">attention</div>
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-2">Content score</div>
-      <div class="col-md-3 text-center score-table-2">30%</div>
+      <div class="col-md-3 text-center score-table-2">bad</div>
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-3 text-center score-table-1">Structure score</div>
-      <div class="col-md-3 text-center score-table-1">60%</div>
+      <div class="col-md-3 text-center score-table-1">good</div>
     </div>
   </div>
-  <button (click)="showMe()">Show</button>
+  <a (click)="takeMeBack()"><img src="../../assets/images/back-arrow.jpg" height="40" width="40"/></a>
   <div class="container container-presentation text-left">
     <div class="row m-2" *ngIf="parsedDocument.nameData[0]">
       {{ parsedDocument.nameData[0] }}
