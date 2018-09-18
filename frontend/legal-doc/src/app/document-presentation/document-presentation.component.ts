@@ -22,14 +22,15 @@ export class DocumentPresentationComponent implements OnInit {
           paragraph.sentences.forEach(sentence => {
             if(sentence.score < 0) {
               this.finalScore = 'mediocre';
+              this.structureScore = 'bad';
             }
           });
         }
       });
       if(this.finalScore === '') {
         this.finalScore = 'good';
+        this.contentScore = 'good';
       }
-      this.contentScore = 'bad';
       this.structureScore = 'good';
     });
   }
