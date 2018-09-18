@@ -16,14 +16,10 @@ export class DocumentInputComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.documentService.toggleDocumentVisibility();
-
     this.text = document.getElementById('texttarea');
-    this.http.post('http://localhost:8081/v10/parse', {doc: this.text.value}, {}).subscribe(data => {
-      console.log(data);
-    });
-    console.log(this.text.value);
-
+    // this.documentService.parseDocument(this.text.value);
+    this.documentService.setInputText(this.text.value);
+    this.documentService.toggleDocumentVisibility();
   }
 
 }
