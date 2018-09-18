@@ -18,7 +18,7 @@ Front-end application written in Angular is placed inside __frontend__ directory
 
 #### Back-end
 
-Server which is responsible for the document analysis is developed in NodeJS using Express library to set up a simple HTTP Server. With the addition of __Cloud Natural Language__ by Google. A set of analysis is done in order to score the document and return data to the front-end.
+Server which is responsible for the document analysis (placed inside __doc-parser__ directory) is developed in NodeJS using Express library to set up a simple HTTP Server. With the addition of __Cloud Natural Language__ by Google. A set of analysis is done in order to score the document and return data to the front-end.
 
 #### APIs, libraries...
 
@@ -28,5 +28,7 @@ This project uses a couple of external libraries (more are listed in projects pa
  - Express
  - natural (NLP library for NodeJS)
  - Google Cloud Natural Language API
+
+
 
 made with ♥ by LegalDoc Team
