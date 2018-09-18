@@ -13,9 +13,9 @@ function parseFile(req, res) {
 	// Lutz Rechtsanwälte ist eine Kanzlei, die vorwiegend im Wirtschafts- und Gesellschaftsrecht sowie in Zivil-, Immobilien- und Mietrecht tätig ist und verfügt über 5 Rechtsanwältinnen und Rechtsanwälte.
 
 	// Das Aufgabengebiet von Frau Maria De Bon umfasste hauptsächlich folgende Aufgaben:
-	
+
 	//  Erstellen und Redaktion von Korrespondenz und juristischen Texten jeder Art (Rechtsschriften, Gutachten, Plädoyernotizen, Protokolle) in deutscher und englischer Sprache nach Diktat, Vorlage und Anweisung;
-	
+
 	//  Eigenständige Erledigung administrativer Korrespondenz;
 
 	//  Zusammenstellen aller erforderlichen Unterlagen für Rechtsschriften und andere grössere Eingaben;
@@ -30,12 +30,11 @@ function parseFile(req, res) {
 
 	// Wir bedauern den Weggang von Frau Maria De Bon und wünschen ihr in beruflicher und privater Hinsicht weiterhin viel Erfolg.`.toString();
 
-
-let text = req.body.doc;
+	let text = req.body.doc;
 
 	// replace list symbols
-	let parsedText = text.replace(/\n\n[^a-zA-Z0-9]/gm, ' * ');
-	 parsedText = parsedText.replace(/\n[^a-zA-Z0-9]/gm, ' * ');
+	let parsedText = text.replace(/\n\n\*/gm, ' * ');
+	parsedText = parsedText.replace(/\n\*/gm, ' * ');
 
 	let fileParsed = parsedText.split(/\n/g);
 	let fileStructure = {

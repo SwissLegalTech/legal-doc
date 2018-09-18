@@ -3,6 +3,7 @@ const natural = require('natural');
 const paragraphsMetaConfig = require('../meta-config/reference-letter-structure.meta.json')
 	.rules;
 const _ = require('lodash');
+const analyzeParagraph = require('./doc-analyzer').analyzeParagraph;
 
 /**
  * @method	analyzeLetterStructure
@@ -25,7 +26,6 @@ function analyzeLetterStructure(parsedFile, callback) {
 		};
 	}
 
-
 	async.each(
 		paragraphsMetaConfig,
 		(paragraphConfig, cb) => {
@@ -39,23 +39,25 @@ function analyzeLetterStructure(parsedFile, callback) {
 						[
 							asyncCb => {
 								// look for meta words in paragraph
-								if(paragraphConfig.metaWords) {
+								if (paragraphConfig.metaWords) {
 									for (let i = 0; i < paragraphConfig.metaWords.length; i++) {
 										const metaWord = paragraphConfig.metaWords[i];
 										let paragraphWords = paragraph.split(' ');
 										for (let j = 0; j < paragraphWords.length; j++) {
 											const word = paragraphWords[j];
-								
+
 											if (
 												natural.LevenshteinDistance(
 													metaWord.toLowerCase(),
 													word.toLowerCase()
 												) < 2
 											) {
-												console.log(`words - ${word},${metaWord} - score - ${natural.LevenshteinDistance(
-													metaWord.toLowerCase(),
-													word.toLowerCase()
-												)}`)
+												console.log(
+													`words - ${word},${metaWord} - score - ${natural.LevenshteinDistance(
+														metaWord.toLowerCase(),
+														word.toLowerCase()
+													)}`
+												);
 												match.push(word);
 												score++;
 											}
@@ -66,7 +68,7 @@ function analyzeLetterStructure(parsedFile, callback) {
 							},
 							asyncCb => {
 								// look for meta mixes in paragraph
-								if(paragraphConfig.metaMix) {
+								if (paragraphConfig.metaMix) {
 									for (let i = 0; i < paragraphConfig.metaMix.length; i++) {
 										const metaMix = paragraphConfig.metaMix[i];
 										if (
@@ -83,20 +85,32 @@ function analyzeLetterStructure(parsedFile, callback) {
 								}
 								asyncCb();
 							},
+							asyncCb => {
+								if (score > 0 && paragraphConfig.sentenceAnalysis) {
+									analyzeParagraph(paragraph).then(
+										paragraphTextMetaData => {
+											paragraphsWithMetaData[
+												index
+											].sentences = paragraphTextMetaData;
+											asyncCb();
+										},
+										err => {
+											asyncCb();
+										}
+									);
+								} else {
+									asyncCb();
+								}
+							},
 						],
 						() => {
-							
 							// check score for paragraph
 							if (score > 0) {
-								// console.log(score)
-								// console.log(match)
 								paragraphsWithMetaData[index].meta.push({
 									class: paragraphConfig.typeCodename,
 									score: score,
 									match: match,
 								});
-
-								// console.log(paragraphsWithMetaData);
 							}
 
 							cbEachOf();

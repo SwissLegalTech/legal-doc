@@ -11,11 +11,13 @@
 		"typeCodename": "work-tasks"
 	}, {
 		"metaWords": ["Auffassungsgabe", "schnell", "eingearbeitet", "Fähigkeit", "fundiert", "Fachwissen", "Leistungsbereitschaft"],
-		"typeCodename": "competence"
+		"typeCodename": "competence",
+		"sentenceAnalysis": true
 	}, {
 		"metaWords": ["Team", "Umgang", "zielgerichtet", "rbeitsweise", "effizient", "sorgfältig", "zuverlässig", "umgang", "Verhalten"],
 		"metaMix": ["mit Vorgesetzten und Kollegen", "robleme mit Autorität"],
-		"typeCodename": "behaviour"
+		"typeCodename": "behaviour",
+		"sentenceAnalysis": true
 	}, {
 		"metaWords": ["endet", "entschlossen", "Arbeitsverhältnis", "beendet"],
 		"typeCodename": "termination"
