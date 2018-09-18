@@ -361,8 +361,4 @@ let annotations = {
 };
 
 // score(annotations);
-<<<<<<< HEAD
 // console.log(annotations.sentences);
-=======
-// console.log(annotations.sentences);
->>>>>>> 30ad45a7085ad57a8d8d350463910fa5bdf383d7

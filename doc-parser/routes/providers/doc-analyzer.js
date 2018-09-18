@@ -27,35 +27,6 @@ function analyzeSentiment(req, res) {
 			console.error('ERROR:', err);
 		});
 }
-<<<<<<< HEAD
-function analyzeDocument(req, res) {
-	var text = req.query.text;
-	console.log(text);
-
-	var document = {
-		content: text,
-		type: 'PLAIN_TEXT',
-	};
-	// Detects the sentiment of the text
-	client
-		.annotateText({
-			document: document,
-			features: {
-				extractSyntax: false,
-				extractEntities: true,
-				extractDocumentSentiment: true,
-			},
-			encodingType: UTF16,
-		})
-		.then(results => {
-			const annotations = results[0];
-			score(annotations);
-			res.send(annotations);
-		})
-		.catch(err => {
-			console.error('ERROR:', err);
-		});
-=======
 
 function analyzeParagraph(text) {
     var document = {
@@ -85,7 +56,6 @@ function analyzeParagraph(text) {
         }
     );
     return promise;
->>>>>>> 30ad45a7085ad57a8d8d350463910fa5bdf383d7
 }
 
 
