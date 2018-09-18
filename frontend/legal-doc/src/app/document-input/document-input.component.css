@@ -4,3 +4,9 @@
   background-color: whitesmoke;
   background-size: cover;
 }
+
+.upload {
+  background-color: rgba(41,41,41,1);
+  color: white;
+  font-size: 30pt;
+}
