@@ -6,6 +6,7 @@ const analyzer = require('./providers/doc-analyzer');
 let router = express.Router();
 
 router.post('/parse', fileParser);
-router.get('/analyze', analyzer);
+router.get('/analyze', analyzer.analyzeDocument);
+router.get('/sentiment', analyzer.analyzeSentiment);
 
 module.exports = router;
