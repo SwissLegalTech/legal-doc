@@ -23,21 +23,15 @@
     </div>
     <div *ngIf="parsedDocument.paragraphs">
       <div class="row m-2" *ngFor="let paragraph of parsedDocument.paragraphs">
-        <div data-toggle="tooltip" title="This paragraph is neutral." *ngIf="!paragraph.sentences">{{ paragraph.text }}</div>
+        <div data-toggle="tooltip" title="This paragraph is neutral." *ngIf="!paragraph.sentences" [innerHTML]="paragraph.text"></div>
         <div *ngIf="paragraph.sentences">
-          <div class="row m-2" *ngFor="let sentence of paragraph.sentences">
-            <p data-toggle="tooltip" title="Score for this sentence: {{sentence.score}}"
+            <span *ngFor="let sentence of paragraph.sentences" data-toggle="tooltip" title="Score for this sentence: {{sentence.score}}"
                [ngClass]="{
           'working-good': sentence.score>0,
-          'working-bad': sentence.score<0}">
-              {{sentence.content}}
-            </p>
-          </div>
+          'working-bad': sentence.score<0}" [innerHTML]="sentence.content + ' '">
+               </span>
         </div>
-
       </div>
     </div>
-
-
   </div>
 </div>
