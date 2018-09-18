@@ -1,0 +1,27 @@
+{
+	"rules": [{
+		"metaWords": ["Arbeitszeugnis", "Zwischenzeugnis", "Zuegnis"],
+		"typeCodename": "title"
+	}, {
+		"metaWords": ["geboren"],
+		"metaMix": ["geboren am", "von bis", "vom bis"],
+		"typeCodename": "introduction"
+	}, {
+		"metaWords": ["Tätigkeitsgebiet", "Tätigkeit", "Tätigkeiten", "Aufgabengebiet", "Aufgabenbereich", "umfasst"],
+		"typeCodename": "work-tasks"
+	}, {
+		"metaWords": ["Auffassungsgabe", "schnell", "eingearbeitet", "Fähigkeit", "fundiert", "Fachwissen", "Leistungsbereitschaft"],
+		"typeCodename": "competence"
+	}, {
+		"metaWords": ["Team", "Umgang", "zielgerichtet", "rbeitsweise", "effizient", "sorgfältig", "zuverlässig", "umgang", "Verhalten"],
+		"metaMix": ["mit Vorgesetzten und Kollegen", "robleme mit Autorität"],
+		"typeCodename": "behaviour"
+	}, {
+		"metaWords": ["endet", "entschlossen", "Arbeitsverhältnis", "beendet"],
+		"typeCodename": "termination"
+	}, {
+		"metaWords": ["bedauern", "bedanken", "wünschen", "weiterhin"],
+		"metaMix": ["alles Gute", "viel Erfolg"],
+		"typeCodename": "conclusion"
+	}]
+}
