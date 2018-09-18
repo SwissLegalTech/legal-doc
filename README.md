@@ -18,7 +18,9 @@ Front-end application written in Angular is placed inside __frontend__ directory
 
 #### Back-end
 
-Server which is responsible for the document analysis (placed inside __doc-parser__ directory) is developed in NodeJS using Express library to set up a simple HTTP Server. With the addition of __Cloud Natural Language__ by Google. A set of analysis is done in order to score the document and return data to the front-end.
+Server which is responsible for the document analysis (placed inside __doc-parser__ directory) is developed in NodeJS using Express library to set up a simple HTTP Server. With the addition of __Cloud Natural Language__ by Google. 
+A set of analysis is done in order to score the document and return data to the front-end.
+You have to [set-up](https://cloud.google.com/natural-language/docs/quickstart) Google Cloud Account and create credentials to be able to communicate with Google Cloud.
 
 #### APIs, libraries...
 
