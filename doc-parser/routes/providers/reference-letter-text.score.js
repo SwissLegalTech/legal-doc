@@ -1,4 +1,5 @@
 const textMetaConfig = require('../meta-config/reference-letter-text.meta.js')
+const natural = require('natural');
 
 /**
  * @method	scoreSentence
@@ -11,18 +12,31 @@ function scoreSentence(sentence) {
 	var text = sentence.text.content;
 	
 	textMetaConfig.good.forEach(function(value) {
-		if (text.includes(value)) {
+		if (natural.LevenshteinDistance(
+			value.toLowerCase(),
+			text.toLowerCase(),
+			{ search: true }
+		).distance < 2) {
 			score++;
 		}
 	});
 
 	textMetaConfig.bad.forEach(function(value) {
-		if (text.includes(value)) {
-			score++;
+		if (natural.LevenshteinDistance(
+			value.toLowerCase(),
+			text.toLowerCase(),
+			{ search: true }
+		).distance < 2) {
+			score--;
 		}
 	});
+
     textMetaConfig.special.forEach(function (value, key) {
-        if (text.includes(key)) {
+        if (natural.LevenshteinDistance(
+			key.toLowerCase(),
+			text.toLowerCase(),
+			{ search: true }
+		).distance < 2) {
             score += value;
         }
 
