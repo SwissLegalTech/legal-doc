@@ -26,13 +26,18 @@ function scoreSentence(sentence) {
             score++;
         }
     })
-    sentence.score = score;
+    sentence = {
+        score: score,
+        content: sentence.text.content,
+        sentiment: sentence.sentiment
+
+    }
+    return sentence
 }
 
 function score(annotations) {
-
-    annotations.sentences.forEach(function (sentence) {
-        scoreSentence(sentence)
+    annotations.sentences.forEach(function (sentence, i, a) {
+        a[i]=scoreSentence(sentence)
     })
 }
 module.exports = score;
@@ -306,5 +311,5 @@ let annotations =
         "language": "de"
     };
 
-score(annotations);
-console.log(annotations.sentences);
+// score(annotations);
+// console.log(annotations.sentences);

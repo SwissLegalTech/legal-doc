@@ -28,34 +28,49 @@ function analyzeSentiment(req, res) {
             console.error('ERROR:', err);
         });
 }
-function analyzeDocument(req, res) {
 
-    var text = req.query.text;
-    console.log(text)
-
+function analyzeParagraph(text) {
     var document = {
         content: text,
         type: 'PLAIN_TEXT',
     };
-// Detects the sentiment of the text
-    client
-        .annotateText({document: document,
-            features:{
-                extractSyntax: false,
-                extractEntities: true,
-                extractDocumentSentiment: true
-            },
-            encodingType: UTF16
-        })
-        .then(results => {
-            const annotations = results[0];
-            score(annotations);
-            res.send(annotations)
-        })
-        .catch(err => {
-            console.error('ERROR:', err);
-        });
+    var promise = new Promise((resolve, reject) => {
+            client
+                .annotateText({
+                    document: document,
+                    features: {
+                        extractSyntax: false,
+                        extractEntities: true,
+                        extractDocumentSentiment: true
+                    },
+                    encodingType: UTF16
+                })
+                .then(results => {
+                    var annotations = results[0];
+                    score(annotations);
+                    resolve(annotations.sentences);
+                })
+                .catch(err => {
+                    console.error('ERROR:', err);
+                    reject();
+                });
+        }
+    );
+    return promise;
 }
+
+
+function analyzeDocument(req, res) {
+    var text = req.query.text;
+    console.log(text)
+    analyzeParagraph(text).then(result => {
+        res.send(result);
+    }).catch(err => {
+            res.status(503);
+        }
+    );
+}
+
 module.exports = {
     analyzeSentiment: analyzeSentiment,
     analyzeDocument: analyzeDocument
