@@ -36,27 +36,6 @@ function createTokenIndex(annotations) {
 }
 
 function scoreSentence(sentence) {
-<<<<<<< HEAD
-	var score = 0;
-	var text = sentence.text.content;
-	good.forEach(function(value) {
-		if (text.includes(value)) {
-			score++;
-		}
-	});
-	bad.forEach(function(value) {
-		if (text.includes(value)) {
-			score++;
-		}
-	});
-	sentence.score = score;
-}
-
-function score(annotations) {
-	annotations.sentences.forEach(function(sentence) {
-		scoreSentence(sentence);
-	});
-=======
     var score = 0;
     var text = sentence.text.content;
     good.forEach(function (value) {
@@ -83,7 +62,6 @@ function score(annotations) {
     annotations.sentences.forEach(function (sentence, i, a) {
         a[i]=scoreSentence(sentence)
     })
->>>>>>> 30ad45a7085ad57a8d8d350463910fa5bdf383d7
 }
 module.exports = score;
 

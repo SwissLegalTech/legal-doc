@@ -73,4 +73,5 @@ function analyzeDocument(req, res) {
 module.exports = {
 	analyzeSentiment: analyzeSentiment,
 	analyzeDocument: analyzeDocument,
+	analyzeParagraph: analyzeParagraph,
 };
