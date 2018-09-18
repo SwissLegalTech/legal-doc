@@ -33,4 +33,4 @@ This project uses a couple of external libraries (more are listed in projects pa
 
 
 
-made with ♥ by LegalDoc Team
+made with ♥ by RLC Team
