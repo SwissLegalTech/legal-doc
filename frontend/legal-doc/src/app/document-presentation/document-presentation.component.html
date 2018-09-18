@@ -36,9 +36,9 @@
     </div>
     <div *ngIf="parsedDocument.paragraphs">
       <div class="row m-2" *ngFor="let paragraph of parsedDocument.paragraphs">
-        <div class="col-md-12" *ngIf="!paragraph.sentences">
+        <div class="col-md-12 minus-margin" >
           <div class="mt-2" *ngIf="paragraph.meta.length>0">
-            <span class="meta-tile" *ngFor="let meta of paragraph.meta">{{ meta.class }}</span>
+            <span class="meta-tile mr-1" *ngFor="let meta of paragraph.meta">{{ meta.class }}</span>
           </div>
         </div>
         <div *ngIf="!paragraph.sentences"></div>
