@@ -14,6 +14,7 @@
     </div>
   </div>
   <a (click)="takeMeBack()"><img src="../../assets/images/back-arrow.jpg" height="40" width="40"/></a>
+  <a (click)="showMe()">show</a>
   <div class="container container-presentation text-left">
     <div class="row m-2" *ngIf="parsedDocument.nameData[0]">
       {{ parsedDocument.nameData[0] }}
@@ -23,12 +24,16 @@
     </div>
     <div *ngIf="parsedDocument.paragraphs">
       <div class="row m-2" *ngFor="let paragraph of parsedDocument.paragraphs">
+        <div *ngIf="!paragraph.sentences">
+          <h3>{{ paragraph.meta.class }}</h3>
+        </div>
         <div data-toggle="tooltip" title="This paragraph is neutral." *ngIf="!paragraph.sentences" [innerHTML]="paragraph.text"></div>
         <div *ngIf="paragraph.sentences">
             <span *ngFor="let sentence of paragraph.sentences" data-toggle="tooltip" title="Score for this sentence: {{sentence.score}}"
                [ngClass]="{
           'working-good': sentence.score>0,
-          'working-bad': sentence.score<0}" [innerHTML]="sentence.content + ' '">
+          'working-bad': sentence.score<0,
+          'working-moderate': sentence.score===0}" [innerHTML]="sentence.content + ' '">
                </span>
         </div>
       </div>

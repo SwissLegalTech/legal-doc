@@ -6,6 +6,10 @@
   background-color: red;
 }
 
+.working-moderate {
+  background-color: yellow;
+}
+
 .container-presentation {
   min-height: 800px;
   background-color: whitesmoke;
