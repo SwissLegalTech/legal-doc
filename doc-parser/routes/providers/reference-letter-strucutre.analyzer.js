@@ -3,7 +3,7 @@ const natural = require('natural');
 const paragraphsMetaConfig = require('../meta-config/reference-letter-structure.meta.json')
 	.rules;
 const _ = require('lodash');
-const analyzeParagraph = require('./doc-analyzer').analyzeParagraph;
+const analyzeParagraph = require('./reference-letter-text.analyzer').analyzeParagraph;
 
 /**
  * @method	analyzeLetterStructure
@@ -16,7 +16,6 @@ function analyzeLetterStructure(parsedFile, callback) {
 	let paragraphsWithMetaData = [],
 		result;
 
-	console.log('paragraphs - ' + JSON.stringify(parsedFile.paragraphs));
 	for (let i = 0; i < parsedFile.paragraphs.length; i++) {
 		const paragraph = parsedFile.paragraphs[i];
 		// create new paragraph data
@@ -52,12 +51,6 @@ function analyzeLetterStructure(parsedFile, callback) {
 													word.toLowerCase()
 												) < 2
 											) {
-												console.log(
-													`words - ${word},${metaWord} - score - ${natural.LevenshteinDistance(
-														metaWord.toLowerCase(),
-														word.toLowerCase()
-													)}`
-												);
 												match.push(word);
 												score++;
 											}
@@ -85,6 +78,7 @@ function analyzeLetterStructure(parsedFile, callback) {
 								}
 								asyncCb();
 							},
+							// analyze text if required
 							asyncCb => {
 								if (score > 0 && paragraphConfig.sentenceAnalysis) {
 									analyzeParagraph(paragraph).then(

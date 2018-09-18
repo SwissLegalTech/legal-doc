@@ -3,7 +3,7 @@ const language = require('@google-cloud/language');
 
 // Instantiates a client
 const client = new language.LanguageServiceClient();
-const score = require('./score');
+const score = require('./reference-letter-text.score');
 
 const UTF16 = 2;
 
@@ -57,9 +57,16 @@ function analyzeParagraph(text) {
 	return promise;
 }
 
+/**
+ * @method	analyzeDocument
+ * @description	function which analyzes paragraph passed in body
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 function analyzeDocument(req, res) {
-	var text = req.query.text;
-	console.log(text);
+	let text = req.body.doc;
+	
 	analyzeParagraph(text)
 		.then(result => {
 			res.send(result);
