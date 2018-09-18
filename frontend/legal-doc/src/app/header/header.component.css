@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .scrolledHeader {
   height: 60px !important;
   transition: all 0.5s;
@@ -5,4 +7,8 @@
 
 .big-heading {
   font-size: 5rem;
+}
+
+.top-menu .mat-toolbar {
+  background-color: rgba(246, 166, 35, 1);
 }

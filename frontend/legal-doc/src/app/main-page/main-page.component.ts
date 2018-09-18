@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DocumentService } from 'src/app/shared/document.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnInit() {
   }
 
+  showDocumentWindow() {
+    this.documentService.toggleMainPageVisibility();
+  }
 }

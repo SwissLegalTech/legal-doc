@@ -38,6 +38,7 @@ import { HttpClientModule} from '@angular/common/http';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatButtonModule
   ],
   providers: [ WINDOW_PROVIDERS, DocumentService],
   bootstrap: [AppComponent]

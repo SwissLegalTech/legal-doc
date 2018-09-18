@@ -1,0 +1,69 @@
+.promo {
+    background-position: 50% 0;
+    height: 500px;
+    max-width: 100%;
+    height: 80%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.separator {
+    height: 20px;
+    background-color: rgba(246, 166, 35, 1);
+    width: 100%;
+}
+
+.promo h2.top {
+    margin: 45px;
+    font-size: 45pt;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.801);
+}
+
+.promo h2.right {
+    margin: 300px 20px 0 40%;
+    width: 60%;
+    font-size: 45pt;
+    font-weight: bold;
+    color: white;
+    background: rgba(59, 0, 132, 0.808);
+}
+
+.promo h2.left {
+    margin: 500px 40% 0 20px;
+    width: 60%;
+    font-size: 45pt;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 132, 49, 0.8);
+}
+
+.try {
+    background: rgb(250, 235, 215);
+    height: 100vh;
+    max-width: 100%;
+    padding: 25% 10% 10%;
+}
+
+.try h2, .try h3 {
+    display: block;
+}
+
+.try h2 {
+    font-size: 45pt;
+    font-weight: bold;
+    color: rgba(41,41,41,1);
+}
+
+.try h3 {
+    font-size: 55pt;
+    margin: 15px;
+    font-weight: bold;
+    color: rgba(41,41,41,1);
+}
+
+.try button {
+    background-color: rgba(41,41,41,1);
+    color: white;
+    margin: 10px;
+}

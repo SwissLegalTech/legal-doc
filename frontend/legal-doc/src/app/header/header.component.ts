@@ -9,7 +9,7 @@ import {DocumentService} from '../shared/document.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  height = 120;
+  height = 30;
   isScrolled = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,

@@ -1,22 +1,7 @@
-<div class="container-fluid sticky-top" [ngClass]="{'scrolledHeader': isScrolled}">
-  <div class="row d-flex" style="background-color: white;">
-    <div class="col-sm-4">
-    </div>
-    <div class="col-sm-4 text-center">
-      <!--<img src="../../assets/images/legal-doc-logo.png" [ngClass]="{'scrolledHeader': isScrolled}"/>-->
-      <h1 class="big-heading" style="font-family: Corbel">LegalDoc</h1>
-    </div>
-    <div class="col-sm-4 text-right pt-3">
-      <div class="dropdown">
-        <button (click)="showDocumentWindow()" class="btn dropdown-toggle" data-toggle="dropdown">
-          <img src="../../assets/icons/burger-menu.png" height="30" width="40"/>
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Link 1</a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a>
-        </div>
-      </div>
-    </div>
+<div class="container-fluid sticky-top top-menu" [ngClass]="{'scrolledHeader': isScrolled}">
+  <div class="row d-flex">
+    <mat-toolbar>
+      <span>LegalDoc</span>
+    </mat-toolbar>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div class="container-fluid">
+<app-main-page *ngIf="documentService.isMainPageVisible"></app-main-page>
+<div class="container-fluid" *ngIf="!documentService.isMainPageVisible">
   <div class="container text-center pt-5">
-    <app-main-page *ngIf="documentService.isMainPageVisible"></app-main-page>
-    <app-document-wrapper *ngIf="!documentService.isMainPageVisible"></app-document-wrapper>
+    <app-document-wrapper ></app-document-wrapper>
   </div>
 </div>
