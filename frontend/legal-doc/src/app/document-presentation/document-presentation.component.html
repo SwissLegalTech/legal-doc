@@ -1,0 +1,39 @@
+<div>
+  <div class="container" style="background-color: white;">
+    <div class="row">
+      <div class="offset-md-3 col-md-3 text-center score-table-1">Overall score</div>
+      <div class="col-md-3 text-center score-table-1">90%</div>
+    </div>
+    <div class="row">
+      <div class="offset-md-3 col-md-3 text-center score-table-2">Content score</div>
+      <div class="col-md-3 text-center score-table-2">30%</div>
+    </div>
+    <div class="row">
+      <div class="offset-md-3 col-md-3 text-center score-table-1">Structure score</div>
+      <div class="col-md-3 text-center score-table-1">60%</div>
+    </div>
+  </div>
+  <div class="container container-presentation">
+    <div class="row m-2">
+      {{ parsedDocument.name }}
+    </div>
+    <div class="row m-2">
+      {{ parsedDocument.address }}
+    </div>
+    <div class="row m-2" *ngFor="let paragraph of parsedDocument.paragraphs">
+      <div data-toggle="tooltip" title="{{paragraph.meta}}!" *ngIf="paragraph.sentences.length===0">{{ paragraph.text }}</div>
+      <div *ngIf="paragraph.sentences.length!==0">
+        <div class="row m-2" *ngFor="let sentence of paragraph.sentences">
+          <p data-toggle="tooltip" title="{{sentence.hint}}!"
+             [ngClass]="{
+          'working-good': sentence.score>5,
+          'working-bad': sentence.score<=5}">
+            {{sentence.text}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

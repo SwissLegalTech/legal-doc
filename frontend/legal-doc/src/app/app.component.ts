@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DocumentService} from './shared/document.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(public documentService: DocumentService) {}
+
+  // resizeHeaderOnScroll(): void {
+  //   window.pageYOffset
+  // }
 }

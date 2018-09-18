@@ -1,0 +1,15 @@
+.background-image {
+  background-image: url('../assets/images/documents.jpg');
+  background-size: cover;
+  /*filter: blur(4px);*/
+  height: 1131px;
+  /*left: 0;*/
+  /*right: 0;*/
+  z-index: -100;
+}
+
+.content {
+  z-index: 1;
+  filter: blur(0px);
+}
+
