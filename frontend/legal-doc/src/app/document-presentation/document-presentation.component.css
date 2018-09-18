@@ -1,0 +1,24 @@
+.working-good {
+  color: green;
+}
+
+.working-bad {
+  color: red;
+}
+
+.container-presentation {
+  min-height: 800px;
+  background-color: whitesmoke;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.score-table-1 {
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+
+.score-table-2 {
+  background-color: #ececea;
+  border-radius: 10px;
+}
